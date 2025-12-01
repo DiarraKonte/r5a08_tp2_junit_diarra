@@ -1,20 +1,21 @@
 package fr.einfolearning.tp2.metiers;////////////////////////////////////////////////////////////////
 
 import fr.einfolearning.tp2.metiers.exceptions.EmacsKillRingOverflowException;
-
 import java.lang.IllegalAccessException;
+
 
 /**
  * Classe TextEditor simulant un éditeur Emacs
+ * 
  * @version 2023
  */
 public class TextEditor {
 
-    private TextBuffer buffer;     // text buffer
+    private TextBufferInterface buffer; // text buffer
     private EmacsKillRing emacsKillring; // killring
-    private int cursor, mark;   // cursor and mark position
+    private int cursor, mark; // cursor and mark position
 
-    private boolean yankMode;   // true if yankpop can be called
+    private boolean yankMode; // true if yankpop can be called
     private int yankLeft, yankRight; // last section yanked
 
     ////////////////////////////////////////////////////////////////
@@ -31,7 +32,6 @@ public class TextEditor {
 
     ////////////////////////////////////////////////////////////////
 
-
     /**
      * Mode yank
      * Permet de coller l'élément courant de la file circulaire à la position
@@ -39,7 +39,7 @@ public class TextEditor {
      *
      * Le mot inséré est marqué avec les curseurs yankLeft(yL) et yankRight(yR)
      *
-     * Dans ce mode on peut faire  suivre un yank de plusieurs  yankPop
+     * Dans ce mode on peut faire suivre un yank de plusieurs yankPop
      *
      * @throws IllegalAccessException
      */
@@ -59,12 +59,13 @@ public class TextEditor {
         buffer.ins(s, yankLeft);
     }
 
-
     /**
-     * Permet de substituer le mot marqué (yank mode) dans le buffer de l'éditeur de texte par le prochain
+     * Permet de substituer le mot marqué (yank mode) dans le buffer de l'éditeur de
+     * texte par le prochain
      * élement qui se trouve dans la file circulaire
      *
-     * Un yankPop doit-être précédé d'un yank c'est à dire qu'une zone doit-être marqué
+     * Un yankPop doit-être précédé d'un yank c'est à dire qu'une zone doit-être
+     * marqué
      * par les curseurs yankLeft et yankRight
      *
      * @throws IllegalAccessException
@@ -83,7 +84,6 @@ public class TextEditor {
         buffer.ins(s, yankLeft);
     }
 
-
     /**
      * Sauve une section de l'éditeur de texte marquée à l'aide du curseur
      * et de de la marque de fin de zone
@@ -98,11 +98,10 @@ public class TextEditor {
         }
     }
 
-
-
     /**
      * Coupe et sauve une section de l'éditeur de texte marquée à l'aide du curseur
      * et de de la marque de fin de zone
+     * 
      * @throws EmacsKillRingOverflowException
      */
     public void killSection() throws EmacsKillRingOverflowException {
@@ -120,21 +119,24 @@ public class TextEditor {
         return (s);
     }
 
-    public TextBuffer getTextBuffer(){
+    public TextBufferInterface getTextBuffer() {
         return this.buffer;
     }
+
     public void setCursor(int pos) {
         yankMode = false;
         if ((pos < 0) || (pos >= buffer.maxP()))
             cursor = pos % (buffer.maxP());
-        else cursor = pos;
+        else
+            cursor = pos;
     }
 
     public void setMark(int pos) {
         yankMode = false;
         if ((pos < 0) || (pos >= buffer.maxP()))
             mark = pos % (buffer.maxP());
-        else mark = pos;
+        else
+            mark = pos;
     }
 
     public int getCursor() {
@@ -157,4 +159,3 @@ public class TextEditor {
         return yankRight;
     }
 }
-

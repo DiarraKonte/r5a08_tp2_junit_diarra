@@ -2,14 +2,14 @@ package fr.einfolearning.tp2.metiers;///////////////////////////////////////////
 
 import java.lang.StringBuffer;
 
-
-
 /**
  * Classe TextBuffer
- * Buffer offrant des fonctionnalités d'insertion et de destruction de sous-chaines
+ * Buffer offrant des fonctionnalités d'insertion et de destruction de
+ * sous-chaines
+ * 
  * @version 2023
  */
-public class TextBuffer {
+public class TextBuffer implements TextBufferInterface {
 
     private StringBuffer sb;
 
@@ -17,23 +17,25 @@ public class TextBuffer {
         sb = new StringBuffer(s);
     }
 
-
     // insert s from position in the buffer
     public void ins(String s, int position) {
         if ((position >= 0) && (position < sb.length()))
             sb.insert(position, s);
     }
 
-
     // delete a string between from to in the buffer
     public void del(int from, int to) {
 
         int max = maxP();
-        if (from < 0)  from = 0;
-        if (from > max) from=max;
+        if (from < 0)
+            from = 0;
+        if (from > max)
+            from = max;
 
-        if (to < 0)  to = 0;
-        if (to > max) to = max;
+        if (to < 0)
+            to = 0;
+        if (to > max)
+            to = max;
 
         sb.delete(from, to);
     }
@@ -42,11 +44,15 @@ public class TextBuffer {
     public String substr(int from, int to) {
 
         int max = maxP();
-        if (from < 0)  from = 0;
-        if (from > max) from=max;
+        if (from < 0)
+            from = 0;
+        if (from > max)
+            from = max;
 
-        if (to < 0)  to = 0;
-        if (to > max) to = max;
+        if (to < 0)
+            to = 0;
+        if (to > max)
+            to = max;
 
         return (sb.substring(from, to));
     }
@@ -59,6 +65,5 @@ public class TextBuffer {
     public String toString() {
         return (sb.toString());
     }
-
 
 }
